@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="sv" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martin Björck Fotografi — Sverige</title>
+  <meta name="description" content="Martin Björck är en svensk fotograf baserad i Sverige. Bläddra bland unika bilder inom natur, stad, porträtt och resor. Köp via Swish." />
+  <meta name="keywords" content="fotograf Sverige, Martin Björck, köpa fotografi, naturfoton, stadsfotografi, Swish konst" />
+  <meta name="author" content="Martin Björck" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://martinbjorck.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Martin Björck Fotografi" />
+  <meta property="og:description" content="Unika fotografier av Martin Björck. Köp via Swish och få högupplöst fil." />
+  <meta property="og:url" content="https://martinbjorck.github.io/" />
+  <meta property="og:locale" content="sv_SE" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Martin Björck","jobTitle":"Fotograf","url":"https://martinbjorck.github.io/","address":{"@type":"PostalAddress","addressCountry":"SE"}}
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══ RESET & BASE ══ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: #0b1a27;
+      color: #e0eef7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ CSS VARIABLES ══ */
+    :root {
+      --deep:    #07121c;
+      --darker:  #0b1a27;
+      --dark:    #0e1f2e;
+      --mid:     #132d42;
+      --surface: #1a3a52;
+      --wave:    #1d4e75;
+      --foam:    #2a6496;
+      --sky:     #5ba3c9;
+      --accent:  #4fc3f7;
+      --accent2: #81d4fa;
+      --white:   #f0f8ff;
+      --text:    #e0eef7;
+      --muted:   #a8d4ea;
+      --subtle:  #5ba3c9;
+      --r: 3px;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ══ NAV ══ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7,18,28,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(79,195,247,.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 400;
+      letter-spacing: .1em; color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .6rem; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--subtle); text-decoration: none; transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-burger {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .nav-burger span { display: block; width: 24px; height: 1px; background: var(--subtle); transition: all .3s; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media(max-width:680px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+    }
+
+    /* ══ MOBILE MENU ══ */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 89;
+      background: rgba(7,18,28,.97); backdrop-filter: blur(12px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300;
+      color: var(--white); text-decoration: none; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ══ HERO ══ */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding-top: 60px; /* nav height */
+    }
+
+    /* Bakgrundsbild — spegelvänd våg */
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 1;
+      background-image: url('images/wave.jpg');
+      /* ── Byt till din bild: url('images/wave.jpg') eller url('images/wave.png') ── */
+      background-size: cover;
+      background-position: center 30%;
+      transform: scaleX(-1);
+      /* Spegelvänd så vågen bryter från höger mot vänster */
+    }
+
+    /* Gradient overlay — mörk till vänster där texten är, transparent till höger */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(
+        to right,
+        rgba(7,18,28,0.88) 0%,
+        rgba(7,18,28,0.72) 30%,
+        rgba(7,18,28,0.30) 60%,
+        rgba(7,18,28,0.05) 100%
+      );
+    }
+
+    /* Nedre tonad övergång till galleriet */
+    .hero-bottom-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--darker));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      padding: 4rem 3rem;
+      max-width: 560px;
+    }
+
+    .hero-eyebrow {
+      font-size: .6rem; letter-spacing: .45em; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp .9s ease .2s forwards;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: .88;
+      color: var(--white);
+      text-shadow: 0 2px 30px rgba(0,0,0,.6);
+      opacity: 0; animation: fadeUp .9s ease .4s forwards;
+    }
+    h1 em { font-style: italic; color: var(--accent2); display: block; }
+    .hero-rule {
+      width: 42px; height: 1px; background: var(--accent);
+      margin: 1.5rem 0; opacity: .8;
+      opacity: 0; animation: fadeUp .9s ease .55s forwards;
+    }
+    .hero-tagline {
+      font-size: clamp(.7rem, 1.6vw, .82rem);
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--muted);
+      text-shadow: 0 1px 12px rgba(0,0,0,.5);
+      opacity: 0; animation: fadeUp .9s ease .65s forwards;
+    }
+
+    .hero-stats {
+      display: flex; gap: 0;
+      margin-top: 2.5rem; padding-top: 1.8rem;
+      border-top: 1px solid rgba(79,195,247,.2);
+      opacity: 0; animation: fadeUp .9s ease .85s forwards;
+    }
+    .hero-stat {
+      padding-right: 1.8rem; margin-right: 1.8rem;
+      border-right: 1px solid rgba(79,195,247,.18);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300;
+      color: var(--accent); line-height: 1;
+      text-shadow: 0 2px 16px rgba(0,0,0,.5);
+    }
+    .hero-stat .lbl {
+      font-size: .55rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-top: .25rem;
+    }
+
+    /* ══ SECTION HEADER ══ */
+    .section-header { text-align: center; padding: 4rem 2rem 2rem; }
+    .section-tag {
+      display: block; font-size: .62rem; letter-spacing: .38em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .9rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--white); line-height: 1;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* ══ GALLERY ══ */
+    #galleri { padding: 0 1.5rem 5rem; max-width: 1700px; margin: 0 auto; }
+
+    .readme-box {
+      background: rgba(19,45,66,.7);
+      border: 1px dashed rgba(79,195,247,.3);
+      border-radius: var(--r); padding: 1.1rem 1.5rem;
+      margin-bottom: 2rem; font-size: .8rem; color: var(--muted); line-height: 1.7;
+    }
+    .readme-box strong { color: var(--accent); }
+    .readme-box code {
+      background: rgba(79,195,247,.12); padding: .15em .4em;
+      border-radius: 2px; font-size: .75rem; color: var(--accent2);
+    }
+
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: .55rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-family: 'Jost', sans-serif; font-size: .62rem;
+      letter-spacing: .22em; text-transform: uppercase;
+      padding: .48rem 1.3rem;
+      border: 1px solid rgba(79,195,247,.28);
+      background: transparent; color: var(--subtle);
+      cursor: pointer; border-radius: 30px; transition: all .25s var(--ease);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent); border-color: var(--accent);
+      color: var(--deep); font-weight: 500;
+    }
+
+    .gallery-grid { columns: 4; column-gap: 6px; }
+    @media(max-width:1200px) { .gallery-grid { columns: 3; } }
+    @media(max-width:780px)  { .gallery-grid { columns: 2; column-gap: 5px; } }
+    @media(max-width:480px)  { .gallery-grid { columns: 1; } }
+
+    .gallery-item {
+      break-inside: avoid; display: block; position: relative;
+      overflow: hidden; background: var(--mid);
+      border-radius: var(--r); cursor: pointer;
+      margin-bottom: 6px;
+      box-shadow: 0 2px 20px rgba(0,0,0,.3);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+      -webkit-user-select: none; user-select: none;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.5);
+    }
+    .gallery-item img {
+      width: 100%; display: block;
+      transition: transform .6s var(--ease);
+      filter: brightness(.82) saturate(.88);
+      pointer-events: none; -webkit-user-drag: none;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(.96) saturate(1);
+    }
+    .gallery-item::before {
+      content: '© Martin Björck';
+      position: absolute; bottom: 8px; right: 10px; z-index: 3;
+      font-size: .52rem; letter-spacing: .1em;
+      color: rgba(255,255,255,.4); text-shadow: 0 1px 3px rgba(0,0,0,.6);
+      pointer-events: none;
+    }
+    .gallery-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to top, rgba(7,18,28,.9) 0%, rgba(7,18,28,.1) 50%, transparent 100%);
+      opacity: 0; transition: opacity .3s var(--ease);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 1rem; color: var(--white); margin-bottom: .2rem;
+    }
+    .gallery-overlay .cat-tag {
+      font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+    }
+    .buy-btn {
+      position: absolute; top: .8rem; right: .8rem; z-index: 4;
+      background: var(--accent); color: var(--deep);
+      border: none; padding: .42rem .95rem;
+      font-family: 'Jost', sans-serif; font-size: .58rem;
+      font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+      cursor: pointer; border-radius: 2px;
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity .3s, transform .3s, background .2s;
+      white-space: nowrap;
+    }
+    .gallery-item:hover .buy-btn { opacity: 1; transform: translateY(0); }
+    .buy-btn:hover { background: var(--accent2); }
+
+    .load-more-wrap { text-align: center; margin-top: 2rem; }
+    .load-more {
+      font-family: 'Jost', sans-serif; font-size: .68rem;
+      letter-spacing: .28em; text-transform: uppercase;
+      padding: .85rem 3rem;
+      border: 1px solid rgba(79,195,247,.3);
+      background: transparent; color: var(--muted);
+      cursor: pointer; border-radius: 2px; transition: all .3s var(--ease);
+    }
+    .load-more:hover { background: var(--accent); border-color: var(--accent); color: var(--deep); font-weight: 500; }
+
+    /* ══ LIGHTBOX ══ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(7,18,28,.94);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s var(--ease);
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative; max-width: 90vw; max-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-inner img {
+      max-width: 85vw; max-height: 82vh; object-fit: contain;
+      border-radius: 2px; box-shadow: 0 40px 100px rgba(0,0,0,.7);
+      display: block; pointer-events: none; -webkit-user-drag: none;
+      filter: brightness(.96) saturate(.97);
+    }
+    .lb-watermark {
+      position: absolute; bottom: .6rem; right: .8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .72rem; letter-spacing: .12em;
+      color: rgba(255,255,255,.35); text-shadow: 0 1px 4px rgba(0,0,0,.6);
+      pointer-events: none;
+    }
+    .lightbox-caption {
+      position: absolute; bottom: -3rem; left: 0; right: 0; text-align: center;
+    }
+    .lightbox-caption h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 1.1rem; color: var(--muted);
+    }
+    .lightbox-caption span { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sky); }
+    .lb-close {
+      position: fixed; top: 1.5rem; right: 1.8rem;
+      background: none; border: none; color: var(--muted);
+      font-size: 2rem; cursor: pointer; line-height: 1; transition: color .2s, transform .2s;
+    }
+    .lb-close:hover { color: var(--accent); transform: rotate(90deg); }
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(7,18,28,.6); border: none; color: var(--muted);
+      font-size: 1.5rem; cursor: pointer; padding: 1rem .8rem;
+      border-radius: 2px; transition: background .2s; backdrop-filter: blur(4px);
+    }
+    .lb-nav:hover { background: var(--accent); color: var(--deep); }
+    .lb-prev { left: 1rem; } .lb-next { right: 1rem; }
+    .lb-buy {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--deep); border: none;
+      padding: .8rem 2.5rem; font-family: 'Jost', sans-serif;
+      font-size: .7rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase;
+      cursor: pointer; border-radius: 3px; transition: background .2s;
+    }
+    .lb-buy:hover { background: var(--accent2); }
+
+    /* ══ SWISH MODAL ══ */
+    .swish-backdrop {
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(7,18,28,.82);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .swish-backdrop.open { opacity: 1; pointer-events: all; }
+    .swish-modal {
+      background: var(--dark); max-width: 460px; width: 92%;
+      padding: 2.5rem; border-radius: 4px; position: relative;
+      text-align: center; transform: translateY(18px); transition: transform .3s;
+      box-shadow: 0 40px 100px rgba(0,0,0,.5);
+      border: 1px solid rgba(79,195,247,.15);
+    }
+    .swish-backdrop.open .swish-modal { transform: translateY(0); }
+    .swish-x {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.6rem;
+      cursor: pointer; color: var(--sky); line-height: 1; transition: color .2s;
+    }
+    .swish-x:hover { color: var(--accent); }
+    .swish-badge {
+      display: inline-block; background: rgba(79,195,247,.1);
+      border-radius: 50px; padding: .4rem 1.2rem; margin-bottom: 1.2rem;
+    }
+    .swish-badge span { font-size: .62rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); }
+    .swish-modal h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 1.8rem; color: var(--white); margin-bottom: .5rem;
+    }
+    .swish-modal p { font-size: .85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    #swishImageTitle { font-style: italic; color: var(--accent); }
+    .swish-num {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600; color: var(--accent);
+      letter-spacing: .06em; padding: 1rem 1.5rem;
+      border: 1px solid rgba(79,195,247,.2); border-radius: 3px;
+      background: rgba(79,195,247,.06); margin: 1.2rem 0 .6rem;
+      cursor: pointer; transition: background .2s;
+    }
+    .swish-num:hover { background: rgba(79,195,247,.12); }
+    .copy-hint { font-size: .6rem; letter-spacing: .15em; color: var(--sky); text-transform: uppercase; margin-bottom: 1.2rem; }
+    .swish-steps { list-style: none; text-align: left; margin: 1rem 0 1.5rem; }
+    .swish-steps li { display: flex; gap: .85rem; align-items: flex-start; margin-bottom: .75rem; font-size: .82rem; color: var(--muted); }
+    .step-n {
+      min-width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: var(--deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 500; flex-shrink: 0;
+    }
+    .swish-cta {
+      width: 100%; padding: .9rem; background: var(--accent); color: var(--deep); border: none;
+      font-family: 'Jost', sans-serif; font-size: .7rem; font-weight: 500;
+      letter-spacing: .25em; text-transform: uppercase;
+      cursor: pointer; border-radius: 3px; transition: background .2s;
+    }
+    .swish-cta:hover { background: var(--accent2); }
+
+    /* ══ ABOUT ══ */
+    #om {
+      max-width: 960px; margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center;
+    }
+    @media(max-width:680px) { #om { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-img {
+      aspect-ratio: 3/4; border-radius: var(--r); overflow: hidden;
+      background: linear-gradient(150deg, var(--surface), var(--wave));
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(79,195,247,.1);
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-ph {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem; font-weight: 300; color: rgba(79,195,247,.2);
+    }
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1;
+      color: var(--white); margin-bottom: 1.2rem;
+    }
+    .about-text h2 em { font-style: italic; color: var(--accent); }
+    .about-rule { width: 36px; height: 1px; background: var(--accent); opacity: .7; margin-bottom: 1.4rem; }
+    .about-text p { font-size: .88rem; line-height: 2; color: var(--muted); margin-bottom: 1rem; }
+    .about-text strong { color: var(--accent); font-weight: 500; }
+
+    /* ══ FOOTER ══ */
+    footer {
+      background: var(--deep); padding: 3rem 1.5rem 2.5rem;
+      border-top: 1px solid rgba(79,195,247,.1); text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 1.6rem; color: var(--muted); margin-bottom: .5rem;
+    }
+    .footer-nav {
+      display: flex; justify-content: center; gap: 2.5rem;
+      margin: 1.2rem 0; flex-wrap: wrap;
+    }
+    .footer-nav a {
+      font-size: .65rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--foam); text-decoration: none; padding: .5rem 0; transition: color .2s;
+    }
+    .footer-nav a:hover { color: var(--accent); }
+    footer p { font-size: .72rem; letter-spacing: .15em; color: var(--surface); margin-top: .4rem; }
+    footer a { color: var(--sky); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ══ UTILS ══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .no-select { -webkit-user-select: none; user-select: none; }
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--mid); color: var(--muted);
+      padding: .65rem 1.6rem; border-radius: 30px;
+      font-size: .72rem; letter-spacing: .12em;
+      opacity: 0; transition: opacity .3s, transform .3s;
+      z-index: 500; white-space: nowrap; pointer-events: none;
+      border: 1px solid rgba(79,195,247,.15);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Mobil: hero text lite kompaktare */
+    @media(max-width:480px) {
+      .hero-content { padding: 2.5rem 1.5rem; }
+      .hero-stats { gap: 0; }
+      .hero-stat { padding-right: 1.2rem; margin-right: 1.2rem; }
+    }
+  </style>
+</head>
+<body class="no-select">
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#galleri" onclick="closeMobile()">Galleri</a>
+    <a href="#om"      onclick="closeMobile()">Om mig</a>
+    <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Martin Björck</a>
+    <ul class="nav-links">
+      <li><a href="#galleri">Galleri</a></li>
+      <li><a href="#om">Om mig</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" aria-label="Meny" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <header>
+    <!-- ══ BYTA BILD: lägg din spegelflippade surfvågsbild i images/wave.jpg ══ -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom-fade"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Fotografi &amp; konst — Sverige</p>
+      <h1>Martin<em>Björck</em></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Bilder som stannar kvar</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num" id="photoCount">—</div>
+          <div class="lbl">Fotografier</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">Swish</div>
+          <div class="lbl">Betalning</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">24h</div>
+          <div class="lbl">Leverans</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- GALLERY -->
+  <section>
+    <div class="section-header fade-in">
+      <span class="section-tag">Samling · fotografier</span>
+      <h2 class="section-title">Mina <em>bästa</em> bilder</h2>
+    </div>
+
+    <div id="galleri">
+      <div class="readme-box fade-in">
+        <strong>📁 Så lägger du till egna bilder:</strong> Skapa en mapp som heter <code>images/</code> i ditt GitHub-repo.
+        Lägg till dina foton (t.ex. <code>images/foto1.jpg</code>) och uppdatera sedan arrayen
+        <code>MY_IMAGES</code> i scriptet längst ner på sidan med filnamn, titel och kategori.
+        Ta sedan bort hela denna ruta. Din våg-bild sparas som <code>images/wave.jpg</code>.
+      </div>
+
+      <div class="filter-bar fade-in">
+        <button class="filter-btn active" data-filter="alla">Alla</button>
+        <button class="filter-btn" data-filter="natur">Natur</button>
+        <button class="filter-btn" data-filter="stad">Stad</button>
+        <button class="filter-btn" data-filter="portratt">Porträtt</button>
+        <button class="filter-btn" data-filter="resor">Resor</button>
+        <button class="filter-btn" data-filter="abstrakt">Abstrakt</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+
+      <div class="load-more-wrap fade-in">
+        <button class="load-more" id="loadMoreBtn">Visa fler bilder</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="om">
+    <div class="about-img fade-in">
+      <!-- Byt ut mot: <img src="images/portrait.jpg" alt="Martin Björck"> -->
+      <div class="about-img-ph">MB</div>
+    </div>
+    <div class="about-text fade-in">
+      <h2>Om <em>mig</em></h2>
+      <div class="about-rule"></div>
+      <p>Jag är Martin Björck, fotograf baserad i Sverige.</p>
+      <p>Varje bild i galleriet är ett minne, en känsla eller en berättelse. Väljer du att äga en av dem tar du med dig ett stycke av den världen hem.</p>
+      <p>Betalning sker enkelt via <strong>Swish</strong>. Klicka på valfri bild, följ stegen — och du får en fullupplöst fil skickad inom 24 timmar.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="kontakt">
+    <div class="footer-logo">Martin Björck</div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="#galleri">Galleri</a>
+      <a href="#om">Om mig</a>
+      <a href="mailto:martinbjk@gmail.com">Kontakt</a>
+    </nav>
+    <p>Swish-betalning &nbsp;·&nbsp; Högupplösta filer &nbsp;·&nbsp; <a href="mailto:martinbjk@gmail.com">martinbjk@gmail.com</a></p>
+    <p style="margin-top:1.2rem;font-size:.58rem;opacity:.4">&copy; <span id="yr"></span> Martin Björck. Alla rättigheter förbehållna.</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lb-close" id="lbClose">×</button>
+    <button class="lb-nav lb-prev" id="lbPrev">&#8592;</button>
+    <button class="lb-nav lb-next" id="lbNext">&#8594;</button>
+    <div class="lightbox-inner">
+      <img id="lbImg" src="" alt="" />
+      <div class="lb-watermark">© Martin Björck</div>
+      <div class="lightbox-caption">
+        <h3 id="lbTitle"></h3>
+        <span id="lbCat"></span>
+      </div>
+    </div>
+    <button class="lb-buy" id="lbBuy">Köp denna bild via Swish</button>
+  </div>
+
+  <!-- SWISH MODAL -->
+  <div class="swish-backdrop" id="swishBackdrop">
+    <div class="swish-modal" role="dialog" aria-modal="true">
+      <button class="swish-x" id="swishX">×</button>
+      <div class="swish-badge"><span>Swish · Säker betalning</span></div>
+      <h2>Köp bild</h2>
+      <p>Du köper: <span id="swishImageTitle">—</span></p>
+      <div class="swish-num" id="swishNumEl" onclick="copySwish()" title="Klicka för att kopiera"></div>
+      <p class="copy-hint">Klicka numret för att kopiera</p>
+      <ul class="swish-steps">
+        <li><span class="step-n">1</span><span>Öppna Swish och skicka valfritt belopp (förslag: 150–500 kr) till numret ovan.</span></li>
+        <li><span class="step-n">2</span><span>Skriv bildens titel som meddelande i Swish.</span></li>
+        <li><span class="step-n">3</span><span>Skicka ett mail med din Swish-bekräftelse — du får bildfilen inom 24 h.</span></li>
+      </ul>
+      <button class="swish-cta" onclick="closeSwish()">Jag förstår — stäng</button>
+    </div>
+  </div>
+
+  <script>
+  /* ══════════════════════════════════════
+     ⚙️  ÄNDRA DESSA — dina uppgifter
+  ══════════════════════════════════════ */
+  const SWISH_NUMBER  = '0708977190';
+  const CONTACT_EMAIL = 'martinbjk@gmail.com';
+
+  /* ══════════════════════════════════════
+     📷  DINA BILDER — lägg till här
+     src: sökväg till bilden (t.ex. "images/DSC01194.jpg")
+     title: bildens namn i galleriet
+     category: natur / stad / portratt / resor / abstrakt
+  ══════════════════════════════════════ */
+  const MY_IMAGES = [
+    { src: "images/DSC01194.jpg",    title: "Strand",        category: "natur" },
+    { src: "images/DSC01201-1.jpg",  title: "Hav",           category: "natur" },
+    { src: "images/DSC01269.jpg",    title: "Kust",          category: "natur" },
+    { src: "images/DSC01387.jpg",    title: "Horisont",      category: "natur" },
+    { src: "images/DSC01686.jpg",    title: "Våg",           category: "natur" },
+    { src: "images/DSC02014.jpg",    title: "Skymning",      category: "natur" },
+    { src: "images/DSC02032.jpg",    title: "Ljus",          category: "natur" },
+    { src: "images/DSC02053.jpg",    title: "Reflektion",    category: "natur" },
+    { src: "images/DSC02083.jpg",    title: "Stillhet",      category: "natur" },
+    { src: "images/DSC08662xxx-1.jpg", title: "Dimma",       category: "natur" },
+    { src: "images/DSC09261xxx.jpg", title: "Morgon",        category: "natur" },
+    { src: "images/DSCF0387-1.jpg",  title: "Rörelse",       category: "natur" },
+    { src: "images/xsurf.jpg",       title: "Surfaren",      category: "natur" },
+  ];
+
+  /* ══════════════════════════════════════
+     RENDER GALLERY
+  ══════════════════════════════════════ */
+  const BATCH = 20;
+  let shown = 0, activeFilter = 'alla', currentIndex = 0;
+  const grid = document.getElementById('galleryGrid');
+
+  // Uppdatera räknaren i hero
+  document.getElementById('photoCount').textContent = MY_IMAGES.length;
+
+  function getFiltered() {
+    return activeFilter === 'alla'
+      ? MY_IMAGES
+      : MY_IMAGES.filter(i => i.category === activeFilter);
+  }
+
+  function makeSVG(img) {
+    const palettes = [
+      ['#1a3a52','#0e2a40'],['#132d42','#1d4e75'],
+      ['#0e1f2e','#1a3a52'],['#1d4e75','#132d42'],
+    ];
+    const [c1, c2] = palettes[img.title.length % palettes.length];
+    const h = 360 + (img.title.length % 5) * 70;
+    return `data:image/svg+xml;charset=utf-8,` + encodeURIComponent(
+      `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='${h}'>
+        <defs>
+          <linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'>
+            <stop offset='0%' stop-color='${c1}'/>
+            <stop offset='100%' stop-color='${c2}'/>
+          </linearGradient>
+        </defs>
+        <rect width='100%' height='100%' fill='url(#g)'/>
+        <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
+          font-family='Georgia,serif' font-size='16' fill='rgba(79,195,247,0.2)' letter-spacing='3'>
+          ${img.title.toUpperCase()}
+        </text>
+      </svg>`
+    );
+  }
+
+  function createItem(img, globalIdx) {
+    const src = img.src || makeSVG(img);
+    const div = document.createElement('div');
+    div.className = 'gallery-item fade-in';
+    div.dataset.category = img.category;
+    div.innerHTML = `
+      <img src="${src}" alt="${img.title}" loading="lazy" draggable="false"/>
+      <div class="gallery-overlay">
+        <h3>${img.title}</h3>
+        <span class="cat-tag">${img.category}</span>
+      </div>
+      <button class="buy-btn">Köp via Swish</button>`;
+    div.querySelector('.buy-btn').addEventListener('click', e => {
+      e.stopPropagation(); openSwish(img.title);
+    });
+    div.addEventListener('click', () => openLightbox(globalIdx));
+    return div;
+  }
+
+  function renderBatch() {
+    const filtered = getFiltered();
+    const slice = filtered.slice(shown, shown + BATCH);
+    slice.forEach((img, i) => {
+      const el = createItem(img, MY_IMAGES.indexOf(img));
+      el.style.transitionDelay = `${i * 35}ms`;
+      grid.appendChild(el);
+    });
+    shown += slice.length;
+    document.getElementById('loadMoreBtn').style.display =
+      shown >= getFiltered().length ? 'none' : '';
+    observeFades();
+  }
+
+  document.getElementById('loadMoreBtn').addEventListener('click', renderBatch);
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      grid.innerHTML = ''; shown = 0;
+      document.getElementById('loadMoreBtn').style.display = '';
+      renderBatch();
+    });
+  });
+
+  /* ══════════════════════════════════════
+     LIGHTBOX
+  ══════════════════════════════════════ */
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    const img = MY_IMAGES[idx];
+    lbImg.src = img.src || makeSVG(img);
+    lbImg.alt = img.title;
+    document.getElementById('lbTitle').textContent = img.title;
+    document.getElementById('lbCat').textContent = img.category;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function lbNav(dir) {
+    currentIndex = (currentIndex + dir + MY_IMAGES.length) % MY_IMAGES.length;
+    openLightbox(currentIndex);
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
+  document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
+  document.getElementById('lbBuy').addEventListener('click', () => {
+    closeLightbox(); openSwish(MY_IMAGES[currentIndex].title);
+  });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
+  let tsX = 0;
+  lb.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tsX;
+    if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+  });
+
+  /* ══════════════════════════════════════
+     SWISH MODAL
+  ══════════════════════════════════════ */
+  const swishBg = document.getElementById('swishBackdrop');
+  document.getElementById('swishNumEl').textContent = SWISH_NUMBER;
+
+  function openSwish(title) {
+    document.getElementById('swishImageTitle').textContent = `"${title}"`;
+    swishBg.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSwish() { swishBg.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('swishX').addEventListener('click', closeSwish);
+  swishBg.addEventListener('click', e => { if (e.target === swishBg) closeSwish(); });
+
+  function copySwish() {
+    const num = SWISH_NUMBER.replace(/\s/g, '');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(num).then(() => showToast('Swish-nummer kopierat! ✓'));
+    } else {
+      showToast(SWISH_NUMBER);
+    }
+  }
+
+  /* ══════════════════════════════════════
+     BILDSKYDD
+  ══════════════════════════════════════ */
+  document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault();
+      showToast('© Martin Björck — Bilderna är skyddade');
+    }
+  });
+  document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(e.key.toLowerCase())) e.preventDefault();
+  });
+
+  /* ══════════════════════════════════════
+     MOBIL NAV
+  ══════════════════════════════════════ */
+  function toggleMobile() {
+    const m = document.getElementById('mobileMenu');
+    const b = document.getElementById('burger');
+    m.classList.toggle('open'); b.classList.toggle('open');
+    document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('burger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ══════════════════════════════════════
+     INTERSECTION OBSERVER — fade-in
+  ══════════════════════════════════════ */
+  function observeFades() {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => io.observe(el));
+  }
+
+  /* TOAST */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  /* ══ INIT ══ */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  renderBatch();
+  observeFades();
+  </script>
+</body>
+</html>
